@@ -1,288 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Portfolio • Junior Developer</title>
-  <meta name="description" content="Portfolio showcasing projects and skills as an aspiring junior/full-stack developer." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio • Developer & Designer</title>
+  <meta name="description" content="Animated portfolio showcasing React, PHP (Laravel), React Native and Design projects.">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <style>
-    /* ==== Keep your existing CSS here ==== */
     :root {
-      --bg: #0b0c10; --surface: #111317; --surface-2: #151821;
-      --text: #e8eefc; --muted: #a6b0c3; --brand: #7c5cff; --brand-2: #22d3ee;
-      --accent: #f472b6; --card-glow: 0 10px 35px rgba(124, 92, 255, .15);
-      --ring: 0 0 0 2px rgba(124, 92, 255, .35), 0 0 40px rgba(124, 92, 255, .2) inset;
-      --radius-xl: 24px; --radius-2xl: 32px; --maxw: 1180px; --ease: cubic-bezier(.22,1,.36,1);
+      --bg: #0b0c10;
+      --surface: #111317;
+      --text: #e8eefc;
+      --muted: #a6b0c3;
+      --brand: #7c5cff;
+      --accent: #22d3ee;
+      --radius: 16px;
+      --maxw: 1180px;
     }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#fafbff; --surface:#ffffff; --surface-2:#f1f5ff; --text:#0b1020; --muted:#5b6476; }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      scroll-behavior: smooth;
     }
-    /* ==== keep all your previous CSS as is ==== */
+
+    a { text-decoration: none; color: inherit; }
+
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+    /* NAV */
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; background: var(--surface); position: sticky; top: 0; z-index: 50; }
+    .nav .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 800; display: flex; align-items: center; gap: 12px; }
+    .nav .brand .logo { background: linear-gradient(135deg, var(--brand), var(--accent)); width:36px; height:36px; border-radius:12px; display:grid; place-items:center; color:white; }
+    .nav .links a { margin-left: 12px; padding: 0.5rem 1rem; border-radius: 12px; background: var(--brand); color:white; font-weight:600; transition: all 0.3s ease; }
+    .nav .links a:hover { background: var(--accent); color: #000; }
+
+    /* HERO */
+    .hero { padding: 5rem 0; display:grid; grid-template-columns: 1.1fr .9fr; gap:40px; align-items:center; }
+    .headline { font-family: 'Space Grotesk', sans-serif; font-weight:800; font-size: clamp(32px, 4vw, 64px); line-height:1.1; }
+    .grad { background: linear-gradient(90deg, var(--brand), var(--accent)); -webkit-background-clip: text; color: transparent; }
+    .sub { color: var(--muted); margin: 1rem 0; font-size: 1rem; }
+    .cta-row a { margin-right: 12px; background: var(--brand); padding: 0.5rem 1rem; border-radius: 12px; color:white; font-weight:600; transition: 0.3s; }
+    .cta-row a:hover { background: var(--accent); color:black; }
+
+    .stats { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; margin-top:2rem; }
+    .stat { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: var(--radius); text-align:center; }
+    .stat .num { font-size:2rem; font-weight:800; }
+    .stat h4 { margin: 0.3rem 0 0; font-size:14px; color:var(--muted); }
+
+    .hero-card { background: rgba(255,255,255,0.05); border-radius: var(--radius); padding: 1rem; }
+    .hero-card .thumb { aspect-ratio: 1/1; display:grid; place-items:center; background: rgba(255,255,255,0.1); border-radius:12px; margin-bottom:1rem; }
+
+    /* SKILLS */
+    #skills { padding: 4rem 0; }
+    .skills-grid { display:grid; grid-template-columns: repeat(6,1fr); gap:12px; }
+    .skill { background: var(--surface); padding:1rem; border-radius:12px; text-align:center; font-weight:600; }
+
+    /* PROJECTS */
+    #projects { padding:4rem 0; }
+    .grid { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; }
+    .card { background: rgba(255,255,255,0.05); border-radius: var(--radius); overflow:hidden; transition: 0.3s; }
+    .card:hover { transform: translateY(-6px); }
+    .card .thumb { aspect-ratio:16/9; display:grid; place-items:center; background: rgba(255,255,255,0.1); }
+    .card .content { padding:1rem; }
+    .card .title { margin:0 0 0.5rem; font-weight:700; font-size:18px; }
+    .card .desc { color: var(--muted); font-size:14px; margin:0 0 0.5rem; }
+    .card .links a { display:inline-block; margin-right:6px; padding: 0.4rem 0.8rem; background: rgba(255,255,255,0.05); border-radius:8px; font-weight:500; font-size:12px; }
+
+    /* ABOUT */
+    #about { padding:4rem 0; display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+    .panel { background: var(--surface); padding:1rem; border-radius: var(--radius); }
+    .timeline { margin-top:1rem; }
+    .item { padding-left:1rem; position:relative; margin-bottom:0.5rem; }
+    .item::before { content:""; width:8px; height:8px; border-radius:50%; background: var(--brand); position:absolute; left:0; top:6px; }
+
+    /* CONTACT */
+    #contact { padding:4rem 0; }
+    .contact { display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
+    form input, form textarea { width:100%; padding:0.5rem; border-radius:12px; border:none; background: rgba(255,255,255,0.05); color:white; margin-bottom:0.5rem; font-family: inherit; }
+    form button { background: var(--brand); color:white; border:none; padding:0.5rem 1rem; border-radius:12px; font-weight:600; cursor:pointer; }
+    form button:hover { background: var(--accent); color:black; }
+
+    footer { padding:2rem 0; text-align:center; color:var(--muted); }
+
+    /* Responsive */
+    @media (max-width:1024px) { .hero { grid-template-columns:1fr; } .skills-grid { grid-template-columns: repeat(4,1fr); } .grid { grid-template-columns: repeat(2,1fr); } #about { grid-template-columns:1fr; } .contact { grid-template-columns:1fr; } }
+    @media (max-width:640px) { .skills-grid { grid-template-columns: repeat(2,1fr); } .grid { grid-template-columns:1fr; } }
   </style>
 </head>
+
 <body>
   <!-- NAV -->
   <nav class="nav">
-    <div class="container nav-inner">
-      <div class="brand">
-        <div class="logo">⚡</div>
-        <span>YOUR NAME</span>
-      </div>
+    <div class="container">
+      <div class="brand"><div class="logo">⚡</div>YOUR NAME</div>
       <div class="links">
-        <a class="btn" href="#projects">Projects</a>
-        <a class="btn" href="#about">About</a>
-        <a class="btn" href="#contact">Contact</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
   <header class="hero container">
-    <div class="orbs">
-      <div class="orb one"></div>
-      <div class="orb two"></div>
+    <div>
+      <h1 class="headline">I build <span class="grad">smooth, animated</span> experiences with <span class="grad">React</span>, <span class="grad">Laravel</span>, <span class="grad">React Native</span>.</h1>
+      <p class="sub">Full-stack developer & designer. View YouTube demos, GitHub repos, and live previews below.</p>
+      <div class="cta-row">
+        <a href="#projects">See Projects</a>
+        <a href="#contact">Hire Me</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num" data-count="12">0</div><h4>Projects</h4></div>
+        <div class="stat"><div class="num" data-count="4">0</div><h4>Years</h4></div>
+        <div class="stat"><div class="num" data-count="8">0</div><h4>Clients</h4></div>
+      </div>
     </div>
-    <div class="hero-grid">
-      <div>
-        <h1 class="headline reveal">Aspiring <span class="grad">Junior Developer</span> crafting <span class="grad">React</span>, <span class="grad">PHP (Laravel)</span> & <span class="grad">React Native</span> projects.</h1>
-        <p class="sub reveal">Early-career full-stack developer building practical applications while learning modern frameworks and best practices.</p>
-        <div class="cta-row reveal">
-          <a href="#projects" class="btn">See Projects</a>
-          <a href="#contact" class="btn">Open to Internships & Junior Roles</a>
-        </div>
-        <div class="stats reveal" style="max-width:560px">
-          <div class="stat"><div class="num" data-count="12">0</div><h4>Projects</h4></div>
-          <div class="stat"><div class="num" data-count="2">0</div><h4>Years Learning</h4></div>
-          <div class="stat"><div class="num" data-count="8">0</div><h4>Technologies</h4></div>
-        </div>
-      </div>
 
-      <div class="hero-card reveal">
-        <div class="thumb" style="border-radius:18px;">
-          <svg width="140" height="140" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L3 7v10l9 5 9-5V7l-9-5Z" stroke="currentColor" stroke-width="1.25"/>
-            <path d="M12 22V12" stroke="currentColor" stroke-width="1.25"/>
-            <path d="M3 7l9 5 9-5" stroke="currentColor" stroke-width="1.25"/>
-          </svg>
-        </div>
-        <p class="sub" style="margin:16px 0 6px">Focused on clean code, responsive UIs, and practical projects to gain real-world experience.</p>
-        <div class="links">
-          <a class="link" href="#projects">Featured work</a>
-          <a class="link" href="#about">My stack</a>
-        </div>
-      </div>
+    <div class="hero-card">
+      <div class="thumb">💻</div>
+      <p class="sub">Design-driven engineering with performance in mind.</p>
     </div>
   </header>
 
   <!-- SKILLS -->
-  <section id="skills">
-    <div class="container">
-      <div class="section-title reveal">
-        <h2>Skills & Tools</h2>
-        <span class="chip">Continuously learning</span>
-      </div>
-      <div class="skills-grid">
-        <div class="skill reveal">React</div>
-        <div class="skill reveal">React Native</div>
-        <div class="skill reveal">TypeScript</div>
-        <div class="skill reveal">PHP</div>
-        <div class="skill reveal">Laravel</div>
-        <div class="skill reveal">Node.js</div>
-        <div class="skill reveal">Tailwind</div>
-        <div class="skill reveal">Figma</div>
-        <div class="skill reveal">UI/UX</div>
-        <div class="skill reveal">REST APIs</div>
-        <div class="skill reveal">MySQL</div>
-        <div class="skill reveal">PostgreSQL</div>
-      </div>
+  <section id="skills" class="container">
+    <h2>Skills & Tools</h2>
+    <div class="skills-grid">
+      <div class="skill">React</div>
+      <div class="skill">React Native</div>
+      <div class="skill">TypeScript</div>
+      <div class="skill">PHP</div>
+      <div class="skill">Laravel</div>
+      <div class="skill">Node.js</div>
+      <div class="skill">Tailwind</div>
+      <div class="skill">Figma</div>
+      <div class="skill">UI/UX</div>
+      <div class="skill">REST APIs</div>
+      <div class="skill">MySQL</div>
+      <div class="skill">PostgreSQL</div>
     </div>
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects">
-    <div class="container">
-      <div class="section-title reveal">
-        <h2>Projects</h2>
-        <span class="chip">Learning by building</span>
+  <section id="projects" class="container">
+    <h2>Projects</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="thumb">🛒</div>
+        <div class="content">
+          <h3 class="title">E-commerce Web App</h3>
+          <p class="desc">Modern storefront with cart, checkout, and admin dashboard. React + Node.</p>
+          <div class="links">
+            <a href="#">Live Demo</a>
+            <a href="#">GitHub</a>
+            <a href="#">YouTube</a>
+          </div>
+        </div>
       </div>
-      <div class="controls reveal" role="tablist" aria-label="Project filters">
-        <button class="pill active" data-filter="all" role="tab" aria-selected="true">All</button>
-        <button class="pill" data-filter="react" role="tab">React</button>
-        <button class="pill" data-filter="php" role="tab">PHP / Laravel</button>
-        <button class="pill" data-filter="react-native" role="tab">React Native</button>
-        <button class="pill" data-filter="design" role="tab">Design</button>
+      <div class="card">
+        <div class="thumb">🚖</div>
+        <div class="content">
+          <h3 class="title">Ride App Dashboard</h3>
+          <p class="desc">Admin panel for rides, drivers, and payments. Laravel + MySQL.</p>
+          <div class="links">
+            <a href="#">Live Demo</a>
+            <a href="#">GitHub</a>
+            <a href="#">YouTube</a>
+          </div>
+        </div>
       </div>
-      <div class="grid" id="projectGrid">
-        <article class="card reveal" data-tags="react">
-          <div class="thumb">
-            <span class="badge">React</span>
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="12" cy="12" r="2.5" stroke="currentColor"/>
-              <ellipse cx="12" cy="12" rx="11" ry="4" stroke="currentColor"/>
-              <ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(60 12 12)" stroke="currentColor"/>
-              <ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(-60 12 12)" stroke="currentColor"/>
-            </svg>
+      <div class="card">
+        <div class="thumb">🎮</div>
+        <div class="content">
+          <h3 class="title">Quiz App</h3>
+          <p class="desc">Clean UI, animations, timers, and score screen. React Native.</p>
+          <div class="links">
+            <a href="#">APK / TestFlight</a>
+            <a href="#">GitHub</a>
+            <a href="#">YouTube</a>
           </div>
-          <div class="content">
-            <h3 class="title">E‑commerce Web App</h3>
-            <p class="desc">Built React + Node app to practice state management, routing, and responsive UI.</p>
-            <div class="links">
-              <a class="link" href="#" target="_blank">Live Demo</a>
-              <a class="link" href="#" target="_blank">GitHub</a>
-              <a class="link" href="#" target="_blank">YouTube</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal" data-tags="php">
-          <div class="thumb">
-            <span class="badge">PHP / Laravel</span>
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 7l9-5 9 5-9 5-9-5Z" stroke="currentColor"/>
-              <path d="M3 12l9 5 9-5" stroke="currentColor"/>
-              <path d="M3 17l9 5 9-5" stroke="currentColor"/>
-            </svg>
-          </div>
-          <div class="content">
-            <h3 class="title">Ride App Dashboard</h3>
-            <p class="desc">Laravel + Blade project to learn CRUD, database management, and admin panels.</p>
-            <div class="links">
-              <a class="link" href="#" target="_blank">Live Demo</a>
-              <a class="link" href="#" target="_blank">GitHub</a>
-              <a class="link" href="#" target="_blank">YouTube</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal" data-tags="react-native">
-          <div class="thumb">
-            <span class="badge">React Native</span>
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="5" y="4" width="14" height="16" rx="2" stroke="currentColor"/>
-              <path d="M8 8h8M8 12h8M8 16h6" stroke="currentColor"/>
-            </svg>
-          </div>
-          <div class="content">
-            <h3 class="title">Quiz App</h3>
-            <p class="desc">Practiced animations, timers, and score tracking using React Native and Expo.</p>
-            <div class="links">
-              <a class="link" href="#" target="_blank">APK / TestFlight</a>
-              <a class="link" href="#" target="_blank">GitHub</a>
-              <a class="link" href="#" target="_blank">YouTube</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal" data-tags="design">
-          <div class="thumb">
-            <span class="badge">Design</span>
-            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 3l8 8-8 8-8-8 8-8Z" stroke="currentColor"/>
-              <circle cx="12" cy="11" r="3" stroke="currentColor"/>
-            </svg>
-          </div>
-          <div class="content">
-            <h3 class="title">Brand & UI System</h3>
-            <p class="desc">Built a design system in Figma to strengthen UI skills and consistency.</p>
-            <div class="links">
-              <a class="link" href="#" target="_blank">Figma File</a>
-              <a class="link" href="#" target="_blank">Case Study</a>
-            </div>
-          </div>
-        </article>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT & CAREER GOALS -->
-  <section id="about">
-    <div class="container about">
-      <div class="panel reveal">
-        <div class="section-title" style="margin-bottom:8px">
-          <h2>About Me</h2>
-          <span class="chip">Cape Town, ZA • Early Career</span>
-        </div>
-        <p>Motivated junior/full-stack developer focused on building practical apps while expanding my skillset. Passionate about React, Laravel, and React Native.</p>
-        <p style="color:var(--muted)">Open to internships, junior roles, and collaborative projects to gain professional experience.</p>
-      </div>
-      <div class="panel reveal">
-        <div class="section-title" style="margin-bottom:8px">
-          <h2>Career Goals</h2>
-          <span class="chip">Internships & Entry-Level Roles</span>
-        </div>
-        <ul>
-          <li>Gain hands-on experience in web & mobile development.</li>
-          <li>Contribute to real-world projects while learning from mentors.</li>
-          <li>Improve UI/UX and code architecture skills.</li>
-          <li>Build a professional portfolio for future roles.</li>
-        </ul>
-      </div>
-      <div class="panel reveal">
-        <div class="section-title" style="margin-bottom:8px">
-          <h2>Highlights</h2>
-          <span class="chip">Timeline</span>
-        </div>
-        <div class="timeline">
-          <div class="item"><strong>2025</strong> — Built React e-commerce app while learning state management and routing.</div>
-          <div class="item"><strong>2024</strong> — Released React Native quiz app to practice animations and timers.</div>
-          <div class="item"><strong>2023</strong> — Developed Laravel ride dashboard to understand CRUD and databases.</div>
-        </div>
+  <!-- ABOUT -->
+  <section id="about" class="container">
+    <div class="panel">
+      <h2>About Me</h2>
+      <p>Full-stack developer focused on delightful user experiences. I build React & Laravel apps with clean code and strong design systems.</p>
+    </div>
+    <div class="panel">
+      <h2>Timeline</h2>
+      <div class="timeline">
+        <div class="item"><strong>2025</strong> — Shipped e-commerce React app.</div>
+        <div class="item"><strong>2024</strong> — Released React Native quiz app.</div>
+        <div class="item"><strong>2023</strong> — Built Laravel ride dashboard.</div>
+        <div class="item"><strong>2022</strong> — Led brand redesigns.</div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <div class="section-title reveal">
-        <h2>Contact</h2>
-        <span class="chip">Let's build something</span>
+  <section id="contact" class="container">
+    <div class="contact">
+      <div class="panel">
+        <h2>Contact Me</h2>
+        <form onsubmit="event.preventDefault(); alert('Form submitted!');">
+          <input type="text" placeholder="Name" required>
+          <input type="email" placeholder="Email" required>
+          <textarea placeholder="Message" required></textarea>
+          <button type="submit">Send</button>
+        </form>
       </div>
-
-      <div class="contact">
-        <div class="card reveal">
-          <h3 style="margin:8px 0 10px">Send a message</h3>
-          <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Thanks! Replace this with your form endpoint.');">
-            <input name="name" placeholder="Your name" required />
-            <input name="email" type="email" placeholder="Email" required />
-            <textarea name="message" placeholder="Tell me about your project…" required></textarea>
-            <button class="submit btn" type="submit">Send</button>
-          </form>
-        </div>
-        <div class="card reveal">
-          <h3 style="margin:8px 0 10px">Links</h3>
-          <div class="links">
-            <a class="link" href="#" target="_blank">GitHub</a>
-            <a class="link" href="#" target="_blank">LinkedIn</a>
-            <a class="link" href="#" target="_blank">YouTube</a>
-            <a class="link" href="mailto:you@example.com" class="link">Email</a>
-            <a class="link" href="#" target="_blank">Resume</a>
-          </div>
-          <p class="sub" style="margin-top:12px">Host as <strong>index.html</strong> on GitHub Pages, Netlify, or Vercel.</p>
-        </div>
+      <div class="panel">
+        <h2>Links</h2>
+        <a href="#">GitHub</a> • <a href="#">LinkedIn</a> • <a href="#">YouTube</a>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="container">© <span id="year"></span> YOUR NAME • Built with HTML/CSS/JS</div>
+    © <span id="year"></span> YOUR NAME
   </footer>
 
   <script>
-    /* ===== Keep your existing JS ===== */
-    const qs = (s, el=document) => el.querySelector(s);
-    const qsa = (s, el=document) => [...el.querySelectorAll(s)];
-    qs('#year').textContent = new Date().getFullYear();
-    const counters = qsa('.num');
-    const animateCount = (el) => { const target = +el.getAttribute('data-count'); let current = 0; const dur = 900; const start = performance.now(); const tick = (t) => { const p = Math.min(1, (t - start)/dur); const eased = 1 - Math.pow(1 - p, 2); current = Math.floor(eased*target); el.textContent = current.toLocaleString(); if(p<1) requestAnimationFrame(tick); else el.textContent = target.toLocaleString(); }; requestAnimationFrame(tick); };
-    const io = new IntersectionObserver((entries)=>{entries.forEach((e)=>{if(e.isIntersecting){e.target.classList.add('show');if(e.target.matches('.stat')) animateCount(qs('.num', e.target));io.unobserve(e.target);}}},{threshold:.16}); qsa('.reveal, .stat').forEach(el=>io.observe(el));
-    const pills = qsa('.pill'); const cards = qsa('#projectGrid .card'); const setFilter = (f)=>{cards.forEach(card=>{const tags = card.getAttribute('data-tags').toLowerCase(); const show = f==='all'||tags.split(/\s+/).includes(f); card.style.display = show?'':'none';}); pills.forEach(p=>p.classList.toggle('active', p.dataset.filter===f));}; pills.forEach(p=>p.addEventListener('click',()=>setFilter(p.dataset.filter)));
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('*').forEach(el=>el.style.scrollBehavior='auto');}
-    const navH = qs('.nav').offsetHeight;
-    document.addEventListener('click', (e)=>{const a = e.target.closest('a[href^="#"]'); if(!a) return; const id = a.getAttribute('href'); const target = qs(id); if(!target) return; e.preventDefault(); const y = target.getBoundingClientRect().top+window.scrollY-(navH-1); window.scrollTo({top:y, behavior:'smooth'});});
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Counter animation
+    const counters = document.querySelectorAll('.num');
+    counters.forEach(el => {
+      const target = +el.dataset.count;
+      let count = 0;
+      const step = target / 100;
+      const interval = setInterval(() => {
+        count += step;
+        if(count >= target){ count = target; clearInterval(interval); }
+        el.textContent = Math.floor(count);
+      }, 20);
+    });
   </script>
 </body>
 </html>
