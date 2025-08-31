@@ -75,6 +75,9 @@
     .card .title { margin:0 0 0.5rem; font-weight:700; font-size:18px; }
     .card .desc { color: var(--muted); font-size:14px; margin:0 0 0.5rem; }
     .card .links a { display:inline-block; margin-right:6px; padding: 0.4rem 0.8rem; background: rgba(255,255,255,0.05); border-radius:8px; font-weight:500; font-size:12px; }
+    .links a.disabled {pointer-events: none;color: gray;text-decoration: none;opacity: 0.6;
+}
+
 
     /* ABOUT */
     #about { padding:4rem 0; display:grid; grid-template-columns:1fr 1fr; gap:2rem; }
@@ -202,9 +205,9 @@
           <h3 class="title">Wordpress Website</h3>
           <p class="desc">Responsive business website with service pages, contact form, and SEO optimization.</p>
           <div class="links">
-            <a href="#">Live Demo</a>
-            <a href="#">GitHub</a>
-            <a href="#">YouTube</a>
+              <a href="#" class="disabled">Live Demo</a>
+              <a href="https://github.com/YourUsername/RideX" target="_blank">GitHub</a>
+              <a href="https://youtube.com/your-video-link" target="_blank">YouTube</a>
           </div>
         </div>
       </div>
